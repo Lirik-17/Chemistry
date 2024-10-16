@@ -14,7 +14,7 @@ Random.seed!(1234);
 # Argments
 is_restart = false;
 p_cutoff = 0.0;
-n_epoch = 10000;
+n_epoch = 1000;
 n_plot = 100;
 opt = ADAMW(0.001, (0.9, 0.999), 1.f-8);
 datasize = 100;
@@ -144,9 +144,9 @@ cbi = function (p, i_exp)
         push!(list_plt, plt)
     end
     plt_all = plot(list_plt...)
-    #png(plt_all, string("figs/i_exp_", i_exp))                                                                       Переписываю путь
+    png(plt_all, string(".\\case1\\figs\\i_exp", i_exp))
     # png(plt_all, string("C:/Users/GeraschenkoKM/Desktop/Нефтехимия/CRNN-main/case1/figs/i_exp_", i_exp))
-    png(plt_all, string("./case1/figs/i_exp_", i_exp))
+    #png(plt_all, string("C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\figs\\i_exp_", i_exp))
     return false
 end
 
@@ -174,10 +174,10 @@ cb = function (p, loss_train, loss_val)
 
         #png(plt_loss, "figs/loss");                                                                                    Переписываю путь
         # png(plt_loss, "C:/Users/GeraschenkoKM/Desktop/Нефтехимия/CRNN-main/case1/figs/loss");
-        png(plt_loss, "./case1/figs/loss");
+        png(plt_loss, "C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\figs\\loss");
 
         #@save "./checkpoint/mymodel.bson" p opt list_loss_train list_loss_val iter                                     Переписываю путь
-        @save "./case1/checkpoint/mymodel.bson" p opt list_loss_train list_loss_val iter
+        @save "C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\checkpoint\\mymodel.bson" p opt list_loss_train list_loss_val iter
     end
 
     iter += 1;
@@ -185,7 +185,7 @@ end
 
 if is_restart
     #@load "./checkpoint/mymodel.bson" p opt list_loss_train list_loss_val iter;                                        Переписываю путь
-    @load "./case1/checkpoint/mymodel.bson" p opt list_loss_train list_loss_val iter;
+    @load "C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\checkpoint\\mymodel.bson" p opt list_loss_train list_loss_val iter;
     iter += 1;
 end
 
