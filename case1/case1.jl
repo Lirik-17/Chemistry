@@ -144,9 +144,10 @@ cbi = function (p, i_exp)
         push!(list_plt, plt)
     end
     plt_all = plot(list_plt...)
-    png(plt_all, string(".\\case1\\figs\\i_exp", i_exp))
-    # png(plt_all, string("C:/Users/GeraschenkoKM/Desktop/Нефтехимия/CRNN-main/case1/figs/i_exp_", i_exp))
-    #png(plt_all, string("C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\figs\\i_exp_", i_exp))
+
+    png(plt_all, string(joinpath(@__DIR__, "figs", ""), i_exp))                                                    # Здесь сохраняется png файл
+    # joinpath самостоятельно определяет относительный путь к папке/файлу
+    
     return false
 end
 
@@ -172,12 +173,10 @@ cb = function (p, loss_train, loss_val)
         plt_loss = plot(list_loss_train, xscale=:log10, yscale=:log10, label="train");
         plot!(plt_loss, list_loss_val, label="val");
 
-        #png(plt_loss, "figs/loss");                                                                                    Переписываю путь
-        # png(plt_loss, "C:/Users/GeraschenkoKM/Desktop/Нефтехимия/CRNN-main/case1/figs/loss");
-        png(plt_loss, "C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\figs\\loss");
 
-        #@save "./checkpoint/mymodel.bson" p opt list_loss_train list_loss_val iter                                     Переписываю путь
-        @save "C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\checkpoint\\mymodel.bson" p opt list_loss_train list_loss_val iter
+        png(plt_loss, joinpath(@__DIR__, "figs", "loss.png"));                                                               # тут сохраняюется loss файл
+
+        @save joinpath(@__DIR__, "checkpoint", "mymodel.bson") p opt list_loss_train list_loss_val iter                      # тут сохраняется bson файл
     end
 
     iter += 1;
@@ -185,8 +184,8 @@ end
 
 if is_restart
     #@load "./checkpoint/mymodel.bson" p opt list_loss_train list_loss_val iter;                                        Переписываю путь
-    @load "C:\\Users\\GeraschenkoKM\\Desktop\\Petrochemistry\\My work CRNN\\Chemistry\\case1\\checkpoint\\mymodel.bson" p opt list_loss_train list_loss_val iter;
-    iter += 1;
+    @load joinpath(@__DIR__, "checkpoint", "mymodel.bson") p opt list_loss_train list_loss_val iter;                         # тут читается bson файл
+    iter += 1; 
 end
 
 # opt = ADAMW(0.001, (0.9, 0.999), 1.f-5);
