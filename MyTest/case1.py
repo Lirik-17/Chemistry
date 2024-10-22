@@ -11,9 +11,9 @@ np.random.seed(1234)
 ###################################
 # Аргументы
 is_restart = False
-p_cutoff = 0.0
-n_epoch = 1000
-n_plot = 100
+p_cutoff = 0.0                                                                    # Нигде не используется
+n_epoch = 1000                                                                    # Количество эпох
+n_plot = 10                                                                       # Частота вывода графиков. Спустя сколько эпох!
 opt = optim.AdamW([torch.tensor(1.0)], lr=0.001)
 datasize = 100
 tstep = 0.4
