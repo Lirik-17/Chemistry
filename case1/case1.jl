@@ -87,8 +87,7 @@ u0 = u0_list[1, :]
 p = randn(Float32, nr * (ns + 1)) .* 1.f-1;
 # p[1:nr] .+= b0;
 
-prob = ODEProblem(crnn!, u0, tspan, saveat=tsteps,
-                  atol=atol, rtol=rtol)
+prob = ODEProblem(crnn!, u0, tspan, saveat=tsteps, atol=atol, rtol=rtol)
 
 function predict_neuralode(u0, p)
     global w_in, w_b, w_out = p2vec(p);
