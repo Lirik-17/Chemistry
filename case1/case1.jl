@@ -14,11 +14,11 @@ Random.seed!(1234);
 # Argments
 is_restart = false;
 p_cutoff = 0.0;                                                     # Непонятно для чего
-n_epoch = 1000;                                                     # Количество эпох. Максимальное
+n_epoch = 30000;                                                     # Количество эпох. Максимальное
 n_plot = 100;                                                       # Частота формирования графиков. Через сколько эпох
 opt = ADAMW(0.001, (0.9, 0.999), 1.f-8);                            # Оптимизатор
-datasize = 100;                                                     # Размер датасетов?
-tstep = 1;                                                          # Шаг времени для татасетов? или типа их количество?
+datasize = 500;                                                     # Размер датасетов?
+tstep = 1;                                                          # Шаг времени для датасетов? или типа их количество?
 n_exp_train = 30;                                                   # Размер данных для обучения
 n_exp_test = 10;                                                    # Размер даных для теста
 n_exp = n_exp_train + n_exp_test;                                   # Общий размер данных
@@ -161,7 +161,7 @@ cb = function (p, loss_train, loss_val)
     if iter % n_plot == 0
         display_p(p)
 
-        @printf("min loss train %.4e val %.4e\n", minimum(list_loss_train), minimum(list_loss_val))
+        @printf("min loss train: %.4e, and validation: %.4e\n", minimum(list_loss_train), minimum(list_loss_val))
 
         list_exp = randperm(n_exp)[1:1];
         println("update plot for ", list_exp)
@@ -211,3 +211,13 @@ for epoch in epochs
     set_description(epochs, string(@sprintf("Loss train %.4e val %.4e", loss_train, loss_val)))
     cb(p, loss_train, loss_val);
 end
+
+# min loss train: 2.3712e-02, and validation: 2.5013e-02     10000 тестов по 10
+# min loss train: 1.0619e-02, and validation: 1.0639e-02     10000 тестов по 100
+# min loss train: 2.3660e-02, and validation: 2.4966e-02     40000 тестов по 10
+# min loss train: 9.1484e-03, and validation: 9.4130e-03     10000 тестов по 200
+# min loss train: 9.1429e-03, and validation: 9.3993e-03     20000 тестов по 200
+# min loss train: 8.7199e-03, and validation: 8.8346e-03     10000 тестов по 300
+# min loss train: 9.2125e-03, and validation: 9.3619e-03     10000 тестов по 1000
+# min loss train: 8.5276e-03, and validation: 8.7177e-03     20000 тестов по 1000
+# min loss train: 8.4164e-03, and validation: 8.4310e-03     10000 тестов по 500
