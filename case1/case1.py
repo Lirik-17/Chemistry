@@ -1,10 +1,10 @@
+import random
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchdiffeq import odeint
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 
 # Установка генератора случайных чисел
 torch.manual_seed(1234)
@@ -33,6 +33,7 @@ ub = 1.0
 
 # Определение истинной функции ОДУ
 def true_ODEfunc(t, y, k):
+
     dydt = torch.zeros_like(y)
     dydt[0] = -2 * k[0] * y[0]**2 - k[1] * y[0]
     dydt[1] = k[0] * y[0]**2 - k[3] * y[1] * y[4]
@@ -51,7 +52,15 @@ tsteps = torch.linspace(tspan[0], tspan[1], datasize)
 ode_data_list = []
 std_list = []
 
-def max_min(ode_data):
+def max_min(ode_data: any)-> any:
+    """_summary_
+
+    Args:
+        ode_data (any): _description_ 
+
+    Returns:
+        any: _description_
+    """    
     return ode_data.max(dim=1)[0] - ode_data.min(dim=1)[0] + lb
 
 for i in range(n_exp):

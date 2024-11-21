@@ -10,7 +10,7 @@ np.random.seed(1234)
 
 ###################################
 # Аргументы
-is_restart = False
+IS_RESTART = False
 p_cutoff = 0.0                                                                    # Нигде не используется
 n_epoch = 1000                                                                    # Количество эпох
 n_plot = 10                                                                       # Частота вывода графиков. Спустя сколько эпох!
@@ -152,7 +152,7 @@ list_loss_train = []
 list_loss_val = []
 iter = 1
 
-if is_restart:
+if IS_RESTART:
     checkpoint = torch.load("./checkpoint/mymodel.pth")
     p = checkpoint['p']
     opt = checkpoint['opt']
