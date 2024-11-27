@@ -81,12 +81,13 @@ def set_default():
     Ea = [70000, 60000, 55000, 80000, 75000]
     T = 250 # + random.randint(0,100)
     matr = [[-2, -1, 1, 1, 0, 0],
-         [0, -2, 1, 0, 2, 0],
-         [0, -1, -2, 1, 0, 1],
-         [1, 0, 0, -2, 1, 0],
-         [1, 0, 0, 0, -2, 1]
+            [0, -2, 1, 0, 2, 0],
+            [0, -1, -2, 1, 0, 1],
+            [1, 0, 0, -2, 1, 0],
+            [1, 0, 0, 0, -2, 1]
           ]
-    vr = 9 + random.randint(0, 3)
+    vr = 10
+    # vr = 10 + random.randint(0, 3)
     h = 0.01
     # C = [0 for _ in range(n)]
     C = [1/6 for _ in range(n)]
@@ -117,7 +118,7 @@ def calculation():
 
     print(strC)
     # n - количество кейсов, пробегаем по ним
-    for _ in range(5):
+    for _ in range(1):
         strC = ''
         # задаем параметры задачи
         k0, Ea, C, W, k, F, T, matr, vr, h = set_default()
@@ -142,6 +143,9 @@ def calculation():
         strC += str(T) + ' ' + str(vr)
         # выводим результат в строку
         print(strC)
+        print()
+        print("Конечные концентрации:")
+        print(*C)
 
 
 if __name__ == "__main__":
