@@ -17,10 +17,10 @@ def get_f(F, W, matr):
     :param matr: матрица стехиометрических коэффициентов схемы превращения
     :return: рассчитанные правые части дифференциальных уравнений
     '''
-    for i in range(len(matr[0])):
+    for i in range(len(matr[0])):       # число вещество
         F[i]=0
-        for j in range(len(matr)):                                                    # pylint: disable=consider-using-enumerate
-            F[i] += F[i]+matr[j][i]*W[j]
+        for j in range(len(matr)):      # число реакций                                # pylint: disable=consider-using-enumerate
+            F[i] += matr[j][i]*W[j]
 
     return F
 
@@ -89,12 +89,12 @@ def set_default():
     vr = 9 + random.randint(0, 3)
     h = 0.01
     # C = [0 for _ in range(n)]
-    C = [1 for _ in range(n)]
+    C = [1/6 for _ in range(n)]
     F = [0 for _ in range(n)]
     W = [0 for _ in range(m)]
     k = [0 for _ in range(m)]
     # for i in range(len(C)):                                                      # pylint: disable=consider-using-enumerate
-        # C[i] = random.randint(0, 100)/100
+    #     C[i] = random.randint(0, 100)/100
 
     return k0, Ea, C, W, k, F, T, matr, vr, h
 
