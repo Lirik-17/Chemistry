@@ -87,15 +87,15 @@ def set_default():
             [1, 0, 0, 0, -2, 1]
           ]
     vr = 10
-    # vr = 10 + random.randint(0, 3)
+    vr = 10 + random.randint(0, 3)
     h = 0.01
     # C = [0 for _ in range(n)]
     C = [1/6 for _ in range(n)]
     F = [0 for _ in range(n)]
     W = [0 for _ in range(m)]
     k = [0 for _ in range(m)]
-    # for i in range(len(C)):                                                      # pylint: disable=consider-using-enumerate
-    #     C[i] = random.randint(0, 100)/100
+    for i in range(len(C)):                                                      # pylint: disable=consider-using-enumerate
+        C[i] = random.randint(0, 100)/100
 
     return k0, Ea, C, W, k, F, T, matr, vr, h
 
@@ -118,7 +118,7 @@ def calculation():
 
     print(strC)
     # n - количество кейсов, пробегаем по ним
-    for _ in range(1):
+    for _ in range(5):
         strC = ''
         # задаем параметры задачи
         k0, Ea, C, W, k, F, T, matr, vr, h = set_default()
@@ -142,10 +142,11 @@ def calculation():
         # запоминаем температуру и время
         strC += str(T) + ' ' + str(vr)
         # выводим результат в строку
+        print("Начальные концентрации:")
         print(strC)
-        print()
         print("Конечные концентрации:")
         print(*C)
+        print()
 
 
 if __name__ == "__main__":
